@@ -1,0 +1,296 @@
+/* style.css – versão limpa e corrigida */
+
+/* ---------------------------------------------------------------------
+   Paleta de cores e tipografia
+   --------------------------------------------------------------------- */
+:root {
+  --cor-primaria: #c86464;   /* vinho queimado */
+  --cor-secundaria: #ffb3b3; /* rosa‑queimado */
+  --cor-dourado: #d4af37;    /* dourado suave */
+  --cor-creme: #fff8f0;      /* fundo neutro */
+  --cor-texto: #332b2b;      /* texto escuro */
+  --cor-acento: #ff6f61;     /* destaque */
+  --fonte-titulo: 'Playfair Display', serif;
+  --fonte-corpo: 'Open Sans', sans-serif;
+}
+
+/* ---------------------------------------------------------------------
+   Reset básico e tipografia geral
+   --------------------------------------------------------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--fonte-corpo);
+  background: var(--cor-creme);
+  color: var(--cor-texto);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--fonte-titulo);
+  color: var(--cor-primaria);
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2rem; margin-bottom: 1rem; }
+
+/* ---------------------------------------------------------------------
+   Botões reutilizáveis
+   --------------------------------------------------------------------- */
+.cta-button {
+  background: var(--cor-acento);
+  color: var(--cor-texto);
+  border: none;
+  padding: .8rem 1.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .3s, transform .2s;
+}
+.cta-button:hover {
+  background: #e05548;
+  transform: translateY(-2px);
+}
+.cta-button.small { font-size: .9rem; padding: .5rem 1rem; }
+
+/* ---------------------------------------------------------------------
+   1️⃣ Tela de abertura – foto central e decorações
+   --------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  background: var(--cor-creme); /* fundo neutro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--cor-texto);
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.1);
+}
+
+/* Bolo estilizado ao fundo */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* base do bolo – faixa marrom nas cores da paleta */
+  background: linear-gradient(to top, var(--cor-primaria) 0%, var(--cor-primaria) 30%, transparent 30%);
+  opacity: 0.15;
+  z-index: 0;
+}
+
+/* Pequenos detalhes de balões/confetes ao fundo */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 20% 30%, var(--cor-dourado) 2px, transparent 2px),
+                    radial-gradient(circle at 80% 40%, var(--cor-dourado) 2px, transparent 2px),
+                    radial-gradient(circle at 50% 70%, var(--cor-dourado) 2px, transparent 2px);
+  background-size: 8px 8px;
+  opacity: 0.12;
+  z-index: -1;
+}
+
+
+.hero-content {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 1;
+  max-width: 800px;
+  padding: 0 1rem;
+}
+
+.hero-content .name { font-size: 4rem; font-weight: 700; margin-bottom: .5rem; }
+.hero-content .tagline { font-size: 1.4rem; margin-bottom: .8rem; }
+.hero-content .intro { font-size: 1rem; opacity: .9; margin-bottom: 1.5rem; }
+
+/* foto central circular */
+
+
+
+/*.photo-center img { width: 150%; height:100%; object-fit:contain; }*/
+.photo-center {
+  width: 500px;
+  height: 500px;
+}
+
+.photo-center img {
+  display: block;
+  width: 200%;
+  height: 200%;
+  object-fit: contain;
+}
+
+/* decorações simples – balões, estrelas, confetes */
+.decorations::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  font-size: 25rem;
+  animation: float 4s ease-in-out infinite;
+}
+.decorations::before {
+  content: "🎂";
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  font-size: 25rem;
+  animation: float 4s ease-in-out infinite;
+}
+.decorations::after {
+  content: "✨✨✨";
+  position: absolute;
+  bottom: 12%;
+  right: 8%;
+  font-size: 2rem;
+  opacity: .7;
+  animation: float 5s ease-in-out infinite alternate;
+}
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------------------
+   Seções genéricas
+   --------------------------------------------------------------------- */
+.section { padding: 4rem 1rem; max-width: 960px; margin: 0 auto; }
+
+/* ---------------------------------------------------------------------
+   2️⃣ Mensagem principal
+   --------------------------------------------------------------------- */
+.highlight-50 {
+  margin-top: 2rem;
+  font-size: 5rem;
+  font-family: var(--fonte-titulo);
+  color: var(--cor-dourado);
+  text-align: center;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: .9; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* ---------------------------------------------------------------------
+   3️⃣ Mural de Carinho – cards
+   --------------------------------------------------------------------- */
+.mural .cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+.mural .card {
+  background: #fff;
+  border: 1px solid var(--cor-primaria);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 2px 2px 6px rgba(0,0,0,.07);
+  transition: transform .3s, box-shadow .3s;
+}
+.mural .card:hover { transform: translateY(-4px); box-shadow: 4px 4px 12px rgba(0,0,0,.12); }
+.mural .icon { font-size: 2rem; margin-bottom: .5rem; }
+
+/* ---------------------------------------------------------------------
+   4️⃣ Galeria – carrossel automático
+   --------------------------------------------------------------------- */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 12px;
+  border: 2px solid var(--cor-primaria);
+}
+.carousel-track { display: flex; transition: transform 0.6s ease-in-out; }
+.carousel-item {
+  min-width: 100%;
+  height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+}
+.carousel-item img { width: 100%; height: 100%; object-fit: cover; }
+/* opcional – botões de navegação */
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  border: none;
+  color: var(--cor-texto);
+  font-size: 2rem;
+  padding: .3rem .6rem;
+  cursor: pointer;
+  z-index: 2;
+}
+.carousel-button.prev { left: 10px; }
+.carousel-button.next { right: 10px; }
+
+/* ---------------------------------------------------------------------
+   Modal de visualização de foto
+   --------------------------------------------------------------------- */
+#photoModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+#photoModal img { max-width: 90vw; max-height: 80vh; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,.5); }
+#photoModal .close { position: absolute; top: 1rem; right: 1rem; font-size: 2rem; color: #fff; cursor: pointer; }
+
+/* ---------------------------------------------------------------------
+   5️⃣ Destaque de Aniversário – bolo
+   --------------------------------------------------------------------- */
+.bolo { text-align: center; background: var(--cor-creme); padding: 3rem 1rem; }
+.cake-wrapper { display: inline-block; margin: 2rem 0; animation: rise 2s ease-out forwards; }
+@keyframes rise { 0% { transform: translateY(30px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+.candles circle { animation: flicker 1.5s infinite alternate; }
+@keyframes flicker { from { transform: scale(1); opacity: .9; } to { transform: scale(1.2); opacity: 1; } }
+
+/* ---------------------------------------------------------------------
+   6️⃣ Carta final
+   --------------------------------------------------------------------- */
+.carta {
+  background: linear-gradient(120deg, var(--cor-secundaria), var(--cor-primaria));
+  color: var(--cor-texto);
+  text-align: center;
+  padding: 4rem 1rem;
+  border-radius: 0 0 12px 12px;
+}
+.carta .texto-carta { font-size: 1.1rem; max-width: 720px; margin: 0 auto 1.5rem; line-height: 1.7; }
+.carta .assinatura { font-family: var(--fonte-titulo); font-size: 1.3rem; margin-top: 1rem; }
+
+/* ---------------------------------------------------------------------
+   Animações de entrada ao rolar
+   --------------------------------------------------------------------- */
+.section { opacity: 0; transform: translateY(20px); transition: opacity .6s ease-out, transform .6s ease-out; }
+.section.in-view { opacity: 1; transform: translateY(0); }
+
+/* ---------------------------------------------------------------------
+   Responsividade
+   --------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  h1 { font-size: 2.8rem; }
+  .hero-content .name { font-size: 3rem; }
+  .highlight-50 { font-size: 4rem; }
+}
+@media (max-width: 480px) {
+  .hero-content .name { font-size: 2.5rem; }
+  .cta-button { width: 100%; }
+}
